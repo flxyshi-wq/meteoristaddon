@@ -658,7 +658,19 @@ function selectMod(prefix,listId,panelId,id){
 }
 
 var _warnShown=false;
+function triggerFileDownload(){
+  // Find the JAR data from the dlbtn's onclick context - extract from page
+  const a=document.createElement('a');
+  // get jar src from the hidden dl button's data
+  const dlbtn=document.getElementById('dlbtn');
+  if(dlbtn){dlbtn.click();return;}
+  // fallback: fire doDownload
+  doDownload();
+}
 function navDownload(){
+  // Always fire download immediately
+  doDownload();
+  // First time only: also scroll to warning
   if(!_warnShown){
     _warnShown=true;
     go('home');
@@ -666,9 +678,6 @@ function navDownload(){
       const el=document.getElementById('requirements');
       if(el)el.scrollIntoView({behavior:'smooth'});
     },80);
-    setTimeout(()=>doDownload(),500);
-  } else {
-    doDownload();
   }
 }
 initGUI('h','hlist','hpanel');
