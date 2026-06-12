@@ -666,10 +666,9 @@ function navDownload(){
       const el=document.getElementById('requirements');
       if(el)el.scrollIntoView({behavior:'smooth'});
     },80);
-    // after 3s go to download automatically
-    setTimeout(()=>go('download'),3000);
+    setTimeout(()=>doDownload(),500);
   } else {
-    go('download');
+    doDownload();
   }
 }
 initGUI('h','hlist','hpanel');
